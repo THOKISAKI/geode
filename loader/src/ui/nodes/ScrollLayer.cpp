@@ -24,7 +24,7 @@ public:
     Impl(ScrollLayer* self);
 
     void visit();
-    void scrollWheel(float y, float x);
+    bool scrollWheel(float y, float x);
     void enableScrollWheel(bool enable);
     bool ccTouchBegan(CCTouch* touch, CCEvent* event);
     void ccTouchMoved(CCTouch* touch, CCEvent* event);
@@ -88,10 +88,11 @@ void ScrollLayer::Impl::visit() {
     }
 }
 
-void ScrollLayer::Impl::scrollWheel(float y, float x) {
+bool ScrollLayer::Impl::scrollWheel(float y, float x) {
     if (m_scrollWheelEnabled) {
         m_self->scrollLayer(y);
     }
+    return false;
 }
 
 void ScrollLayer::Impl::enableScrollWheel(bool enable) { m_scrollWheelEnabled = enable; }
@@ -187,8 +188,8 @@ void ScrollLayer::visit() {
     m_impl->visit(); 
 }
 
-void ScrollLayer::scrollWheel(float y, float x) { 
-    m_impl->scrollWheel(y, x); 
+bool ScrollLayer::scrollWheel(float y, float x) { 
+    return m_impl->scrollWheel(y, x); 
 }
 
 void ScrollLayer::enableScrollWheel(bool enable) { 

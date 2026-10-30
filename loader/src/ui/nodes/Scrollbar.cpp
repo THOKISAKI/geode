@@ -24,7 +24,7 @@ public:
     void ccTouchEnded(CCTouch*, CCEvent*);
     void ccTouchCancelled(CCTouch*, CCEvent*);
     void ccTouchMoved(CCTouch* touch, CCEvent*);
-    void scrollWheel(float x, float y);
+    bool scrollWheel(float x, float y);
     void registerWithTouchDispatcher();
     void draw();
     bool init(CCScrollLayerExt* target);
@@ -72,9 +72,9 @@ void Scrollbar::Impl::ccTouchMoved(CCTouch* touch, CCEvent*) {
     m_target->m_contentLayer->setPositionY(posY);
 }
 
-void Scrollbar::Impl::scrollWheel(float x, float y) {
-    if (!m_target) return;
-    m_target->scrollWheel(x, y);
+bool Scrollbar::Impl::scrollWheel(float x, float y) {
+    if (!m_target) return false;
+    return m_target->scrollWheel(x, y);
 }
 
 void Scrollbar::Impl::registerWithTouchDispatcher() {
@@ -223,8 +223,8 @@ void Scrollbar::ccTouchCancelled(CCTouch* t, CCEvent* e) {
 void Scrollbar::ccTouchMoved(CCTouch* t, CCEvent* e) { 
     m_impl->ccTouchMoved(t, e); 
 }
-void Scrollbar::scrollWheel(float x, float y) { 
-    m_impl->scrollWheel(x, y); 
+bool Scrollbar::scrollWheel(float x, float y) { 
+    return m_impl->scrollWheel(x, y); 
 }
 void Scrollbar::registerWithTouchDispatcher() { 
     m_impl->registerWithTouchDispatcher(); 
