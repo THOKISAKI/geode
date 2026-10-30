@@ -207,7 +207,7 @@ public:
 	// @note RobTop Addition
     bool isUsingForcePrio();
 	// @note RobTop Addition
-    void registerForcePrio(cocos2d::CCObject*, int);
+    void registerForcePrio(cocos2d::CCObject*, int,int);
 	// @note RobTop Addition
     void unregisterForcePrio(cocos2d::CCObject*);
 
